@@ -1,0 +1,25 @@
+set [var] [val] - установить переменной значение
+input - ввести значение
+output - вывести результат 
+add [var/val] [var/val] - сложить
+munis [var/val] [var/val] - вычесть
+mult [var/val] [var/val] - перемножить
+INE - сравнение 2 переменных (IfNotEqual)
+end - прерывание сравнения
+key - создание указателя
+jmp - переход к указателю
+exit - окончание программы
+
+Факториал
+set $a 1
+set $b 1
+input $n
+key startFac
+mult $a $b $b
+INE $a $n
+add $a 1 $a
+jmp startFac
+end
+output $b
+exit
+
