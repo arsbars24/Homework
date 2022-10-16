@@ -1,0 +1,94 @@
+<html>
+<head>
+	<title>Hamming code</title>
+	<script> 
+	function code(){
+		let to_code = document.getElementById('input_str').
+		value.split('');
+		for (let i = 0; i < to_code.length; i++)
+			to_code[i] *= 1;
+		
+		let b1, b2, b3;
+		
+		if ((to_code[0] + to_code[1] + to_code[3]) % 2 == 0){
+			b1 = '0';
+		} else {
+			b1 = '1';
+		}
+		if ((to_code[1] + to_code[2] + to_code[3]) % 2 == 0){
+			b2 = '0';
+		} else {
+			b2 = '1';
+		}
+		if ((to_code[0] + to_code[2] + to_code[3]) % 2 == 0){
+			b3 = '0';
+		} else {
+			b3 = '1';
+		}
+		
+		to_code = to_code.join('') + b1 + b2 + b3;
+		alert(to_code);
+		document.getElementById('output_str').value = to_code;
+	}
+	</script>
+	<!--Using 2 funcions on call-->
+	
+	<script>
+	function decode(){
+		let to_decode = document.getElementById('output_str').
+			value.split('');
+		for (let i = 0; i < to_decode.length; i++)
+			to_decode[i] *= 1;
+		let r1, r2, r3;
+		<!--ring 1, 2 ,3-->
+		r1 = to_decode[0] + to_decode[1] + to_decode[3] + to_decode[4];
+		r2 = to_decode[1] + to_decode[2] + to_decode[3] + to_decode[5];
+		r3 = to_decode[0] + to_decode[2] + to_decode[3] + to_decode[6];
+		if ((r1 % 2 != 0) && (r2 % 2 != 0) && (r3 % 2 != 0)){
+			if (to_decode[3] == 0){
+				to_decode[3] = 1;
+			} else {
+				to_decode[3] = 0;
+			}
+		} else {
+			if ((r1 % 2 != 0) && (r2 % 2 != 0)){
+				if (to_decode[1] == 0){
+					to_decode[1] = 1;
+				} else {
+					to_decode[1] = 0;
+				}
+			}
+			if ((r1 % 2 != 0) && (r3 % 2 != 0)){
+				if (to_decode[0] == 0){
+					to_decode[0] = 1;
+				} else {
+					to_decode[0] = 0;
+				}
+			}
+			if ((r2 % 2 != 0) && (r3 % 2 != 0)){
+				if (to_decode[2] == 0){
+					to_decode[2] = 1;
+				} else {
+					to_decode[2] = 0;
+				}
+			}
+		}
+		to_decode = to_decode.slice(0, -3);
+		alert(to_decode);
+		to_decode = to_decode.join('');
+		document.getElementById('output1').value = to_decode;
+		
+	}
+	</script>
+</head>
+<body>
+
+	<h1>Hamming Code</h1>
+	<p><input type='text' id='input_str'/> four bites to code </p>
+	<p><input type='button' value='TO CODE' onClick='code()'/> </p>
+	<p><input type='text' id='output_str' /> Encoded message </p>
+	<p><input type='button' value='TO DECODE' onClick='decode()'/> </p>
+	<p><input type='text' id='output1'/> Decoded message </p>
+	
+</body>
+</html>
