@@ -8,29 +8,24 @@ if (subs.length > text.length){
     
 } else {
     console.time();
-    if (subs.length > text.length){
-        console.log("Substring is bigger than text");
-    }
-    else {
-        i = 0;
-        textsliding:
-        while (i < text.length - subs.length + 1){
-            j = 0;
-            subscompare:
-            while (text[i + j] == subs[j]){
-                j++;
-                if (j == subs.length){
-                    index.push(i + 1);
-                    break;
-                }
-                
+    i = 0;
+    textsliding:
+    while (i < text.length - subs.length + 1){
+        j = 0;
+        subscompare:
+        while (text[i + j] == subs[j]){
+            j++;
+            if (j == subs.length){
+                index.push(i + 1);
+                break;
             }
-            i++;
+  
         }
-        
-        console.timeEnd();
-        console.log(index);
+        i++;
     }
+        
+    console.timeEnd();
+    console.log(index);
 
 }
 
